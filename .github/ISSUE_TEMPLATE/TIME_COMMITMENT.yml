@@ -22,8 +22,8 @@ body:
       label: Timeline
       description: |
         Please tell us:
-* When you can start
-* How much time you are willing to spend on your proposed project, e.g. “I can spend 4 hours 5 days a week for the next 2 months working on this project”.
+        * When you can start
+        * How much time you are willing to spend on your proposed project, e.g. “I can spend 4 hours 5 days a week for the next 2 months working on this project”.
   - type: textarea
     id: risks_and_mitigation
     attributes:
