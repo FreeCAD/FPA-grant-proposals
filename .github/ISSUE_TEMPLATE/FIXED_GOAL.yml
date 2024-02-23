@@ -1,6 +1,6 @@
 name: Fixed-Goal Grant Proposal
 description: Submit a grant proposal for a project with a fixed goal
-title: ""
+title: "Fixed-Goal Grant Proposal"
 labels: ["fixed goal"]
 body:
   - type: textarea
