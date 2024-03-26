@@ -23,7 +23,7 @@ body:
       description: |
         Please provide a list of stages past the planning stage. For each stage please list:
         * Name of the stage
-        * Estimated time to accomplish in hours
+        * Estimated time to accomplish. E.g. I'm planning to start in April and finish in August
   - type: textarea
     id: risks_and_mitigation
     attributes:
