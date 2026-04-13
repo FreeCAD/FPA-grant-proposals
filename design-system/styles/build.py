@@ -20,18 +20,16 @@ OUTPUT_DIR = os.path.join(STYLES_DIR, "output")
 THEMES_DIR = os.path.join(STYLES_DIR, "themes")
 
 
-def compile_scss(input_file, output_file, indent=4):
+def compile_scss(input_file, output_file):
     """Compile a SCSS file to QSS."""
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
     print(f"Compiling: {input_file} -> {output_file}")
     
-    qtsass.compile(
-        inputfile=input_file,
-        outputfile=output_file,
-        indent=indent,
-        compress=False
-    )
+    qss_content = qtsass.compile_filename(input_file)
+    
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(qss_content)
     
     print(f"  Done!")
 
