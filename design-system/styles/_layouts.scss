@@ -1,0 +1,261 @@
+// Layout and Container Styles
+// These styles apply to Qt layout containers
+
+@import 'variables';
+
+// QVBoxLayout
+QVBoxLayout {
+    spacing: $spacing-md;
+    margin: 0;
+}
+
+QVBoxLayout[class="dialog-content"] {
+    spacing: $spacing-lg;
+    margin: $spacing-lg;
+}
+
+// QHBoxLayout
+QHBoxLayout {
+    spacing: $spacing-md;
+    margin: 0;
+}
+
+QHBoxLayout[class="button-box"] {
+    spacing: $spacing-md;
+    margin: 0;
+    padding-top: $spacing-md;
+}
+
+// QGridLayout
+QGridLayout {
+    spacing: $spacing-md;
+    margin: 0;
+}
+
+QGridLayout[class="form-layout"] {
+    spacing: $spacing-sm $spacing-lg;
+    margin: $spacing-lg;
+}
+
+// Form Layout Labels
+QFormLayout {
+    spacing: $spacing-sm $spacing-lg;
+    margin: $spacing-lg;
+}
+
+QFormLayout QLabel {
+    color: $color-text-secondary;
+    font-size: $font-size-base;
+    padding-right: $spacing-sm;
+}
+
+// QSplitter
+QSplitter {
+    background-color: $color-background-secondary;
+    border: none;
+}
+
+QSplitter::handle {
+    background-color: $color-border;
+}
+
+QSplitter::handle:horizontal {
+    width: 1px;
+}
+
+QSplitter::handle:vertical {
+    height: 1px;
+}
+
+QSplitter::handle:hover {
+    background-color: $color-accent-primary;
+}
+
+QSplitter::handle:pressed {
+    background-color: $color-accent-active;
+}
+
+// Splitter States
+QSplitter[state="maximized"]::handle {
+    background-color: $color-accent-primary;
+}
+
+// QStackedWidget Container
+QStackedWidget {
+    background-color: $color-background-secondary;
+}
+
+QStackedWidget[class="dialog-content"] {
+    background-color: $color-background-primary;
+}
+
+// Scroll Area Containers
+QScrollArea {
+    background-color: $color-background-secondary;
+    border: none;
+}
+
+QScrollArea[class="panel-content"] {
+    background-color: $color-background-secondary;
+    border: none;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: $color-background-secondary;
+    border: none;
+}
+
+// Dock Widget Container
+QDockWidget {
+    background-color: $color-background-secondary;
+    border: 1px solid $color-border;
+    titlebar-close-icon: url(icons/close.svg);
+    titlebar-normal-icon: url(icons/dock.svg);
+}
+
+// Group Container
+QGroupBox {
+    background-color: transparent;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    margin-top: $spacing-lg;
+    padding-top: $spacing-lg;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 $spacing-sm;
+    left: $spacing-md;
+}
+
+QGroupBox[class="collapsed"] {
+    padding-top: 0;
+}
+
+QGroupBox[class="collapsed"]::title {
+    subcontrol-position: top left;
+}
+
+// Tool Box Container
+QToolBox {
+    background-color: $color-background-secondary;
+    border: none;
+}
+
+QToolBox::tab {
+    background-color: $color-background-tertiary;
+    color: $color-text-secondary;
+    padding: $spacing-sm $spacing-lg;
+    border-bottom: 1px solid $color-border;
+}
+
+QToolBox::tab:selected {
+    background-color: $color-background-secondary;
+    color: $color-text-primary;
+}
+
+QToolBox::tab:hover:!selected {
+    background-color: $color-surface;
+}
+
+// Tab Widget Container
+QTabWidget {
+    background-color: $color-background-secondary;
+}
+
+QTabWidget::pane {
+    background-color: $color-background-primary;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $spacing-sm;
+}
+
+QTabBar {
+    background-color: transparent;
+}
+
+QTabBar::tab {
+    background-color: $color-background-tertiary;
+    color: $color-text-secondary;
+    padding: $spacing-sm $spacing-lg;
+    border: 1px solid $color-border;
+    border-bottom: none;
+    margin-right: $spacing-xs;
+}
+
+QTabBar::tab:selected {
+    background-color: $color-background-primary;
+    color: $color-text-primary;
+    border-bottom: 1px solid $color-background-primary;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: $color-surface;
+}
+
+QTabBar::tab:disabled {
+    color: $color-text-disabled;
+}
+
+// Header Widget
+QWidget[class="header"] {
+    background-color: $color-background-tertiary;
+    border-bottom: 1px solid $color-border;
+    min-height: $size-toolbar-height;
+    padding: 0 $spacing-md;
+}
+
+QWidget[class="header-title"] {
+    background-color: transparent;
+    color: $color-text-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+}
+
+// Footer Widget
+QWidget[class="footer"] {
+    background-color: $color-background-secondary;
+    border-top: 1px solid $color-border;
+    min-height: 32px;
+    padding: $spacing-sm $spacing-md;
+}
+
+// Status Bar Container
+QStatusBar {
+    background-color: $color-background-secondary;
+    border-top: 1px solid $color-border;
+    min-height: $size-statusbar-height;
+}
+
+QStatusBar QLabel {
+    background-color: transparent;
+    padding: 0 $spacing-sm;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+}
+
+QStatusBar QLabel[class="status-message"] {
+    color: $color-text-primary;
+}
+
+QStatusBar QLabel[class="status-warning"] {
+    color: $color-warning;
+}
+
+QStatusBar QLabel[class="status-error"] {
+    color: $color-error;
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+// Progress Indicator in Status Bar
+QStatusBar QProgressBar {
+    max-width: 100px;
+    min-height: 12px;
+}
