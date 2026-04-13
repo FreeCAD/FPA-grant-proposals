@@ -1,0 +1,36 @@
+// Dark Theme (Default)
+// Extends base styles with dark color scheme
+
+@import '../variables';
+@import '../base';
+@import '../components';
+
+// Dark theme uses the default colors defined in variables
+// This file can be extended with additional dark-specific overrides
+
+// Ensure all backgrounds use dark palette
+QWidget {
+    background-color: $color-background-secondary;
+}
+
+QMainWindow {
+    background-color: $color-background-primary;
+}
+
+// Force dark backgrounds for all input areas
+QLineEdit,
+QTextEdit,
+QPlainTextEdit,
+QSpinBox,
+QDoubleSpinBox,
+QComboBox {
+    background-color: $color-background-primary;
+}
+
+// Ensure contrast is maintained
+QMenu::item:selected,
+QMenuBar::item:selected,
+QTreeView::item:hover,
+QListView::item:hover {
+    background-color: $color-surface;
+}

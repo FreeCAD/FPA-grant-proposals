@@ -1,0 +1,97 @@
+// FreeCAD Design Tokens - SCSS Variables
+// Generated from design-system/tokens/README.md
+// These variables are compiled to QSS custom properties by qtsass
+
+// Color Tokens
+$color-background-primary: #1e1e1e;
+$color-background-secondary: #252526;
+$color-background-tertiary: #2d2d30;
+$color-surface: #3c3c3c;
+$color-border: #3e3e42;
+$color-border-strong: #007acc;
+$color-text-primary: #cccccc;
+$color-text-secondary: #9d9d9d;
+$color-text-disabled: #5a5a5a;
+$color-accent-primary: #007acc;
+$color-accent-hover: #1e8ad2;
+$color-accent-active: #005a9e;
+$color-success: #4ec9b0;
+$color-warning: #dcdcaa;
+$color-error: #f14c4c;
+$color-info: #569cd6;
+
+// Typography Tokens
+$font-family-primary: "Segoe UI", Arial, sans-serif;
+$font-family-mono: "Cascadia Code", "Consolas", monospace;
+$font-size-xs: 10px;
+$font-size-sm: 11px;
+$font-size-base: 12px;
+$font-size-lg: 13px;
+$font-size-xl: 14px;
+$font-size-xxl: 16px;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+
+// Spacing Tokens
+$spacing-xs: 2px;
+$spacing-sm: 4px;
+$spacing-md: 6px;
+$spacing-lg: 8px;
+$spacing-xl: 12px;
+$spacing-xxl: 16px;
+$spacing-xxxl: 24px;
+
+// Sizing Tokens
+$size-button-height: 24px;
+$size-button-height-sm: 20px;
+$size-button-height-lg: 28px;
+$size-input-height: 24px;
+$size-icon-sm: 16px;
+$size-icon-md: 20px;
+$size-icon-lg: 24px;
+$size-toolbar-height: 32px;
+$size-menubar-height: 26px;
+$size-statusbar-height: 24px;
+$size-panel-width: 250px;
+$size-panel-min-width: 180px;
+$size-panel-max-width: 400px;
+
+// Border Radius Tokens
+$radius-sm: 2px;
+$radius-md: 3px;
+$radius-lg: 4px;
+$radius-round: 50%;
+
+// Shadow Tokens
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+$shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.4);
+$shadow-focus: 0 0 0 2px rgba(0, 122, 204, 0.4);
+
+// Mixins
+@mixin focus-ring {
+    outline: none;
+    border-color: $color-border-strong;
+    box-shadow: $shadow-focus;
+}
+
+@mixin button-base {
+    font-family: $font-family-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-md;
+    padding: $spacing-sm $spacing-lg;
+    min-height: $size-button-height;
+}
+
+@mixin input-base {
+    background-color: $color-background-primary;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $spacing-xs $spacing-sm;
+    min-height: $size-input-height;
+    font-family: $font-family-primary;
+    font-size: $font-size-base;
+    color: $color-text-primary;
+}

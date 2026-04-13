@@ -1,0 +1,58 @@
+// Light Theme
+// Alternative theme with light color scheme (future work)
+
+@import '../variables';
+@import '../base';
+@import '../components';
+
+// Light theme color overrides
+$color-background-primary: #ffffff;
+$color-background-secondary: #f5f5f5;
+$color-background-tertiary: #e8e8e8;
+$color-surface: #dcdcdc;
+$color-border: #c0c0c0;
+$color-border-strong: #0078d4;
+$color-text-primary: #1e1e1e;
+$color-text-secondary: #6e6e6e;
+$color-text-disabled: #a0a0a0;
+
+// Apply light backgrounds
+QWidget {
+    background-color: $color-background-secondary;
+}
+
+QMainWindow {
+    background-color: $color-background-primary;
+}
+
+QLineEdit,
+QTextEdit,
+QPlainTextEdit,
+QSpinBox,
+QDoubleSpinBox,
+QComboBox {
+    background-color: $color-background-primary;
+    border-color: $color-border;
+}
+
+QToolBar {
+    background-color: $color-background-secondary;
+    border-color: $color-border;
+}
+
+QDockWidget {
+    background-color: $color-background-secondary;
+    border-color: $color-border;
+}
+
+QTreeView,
+QTableView,
+QListView {
+    background-color: $color-background-primary;
+    alternate-background-color: $color-background-secondary;
+}
+
+QHeaderView::section {
+    background-color: $color-background-tertiary;
+    border-color: $color-border;
+}

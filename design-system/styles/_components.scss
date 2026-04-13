@@ -1,0 +1,253 @@
+// Component-Specific Styles
+// Built on top of base styles for complex components
+
+@import 'variables';
+
+// Toolbars
+QToolBar {
+    background-color: $color-background-secondary;
+    border: none;
+    border-top: 1px solid $color-border;
+    padding: $spacing-xs $spacing-sm;
+    spacing: $spacing-xs;
+    max-height: $size-toolbar-height;
+}
+
+QToolBar[docked="false"] {
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+}
+
+QToolBar::separator {
+    width: 1px;
+    background-color: $color-border;
+    margin: $spacing-xs 0;
+}
+
+// Dock Widgets
+QDockWidget {
+    background-color: $color-background-secondary;
+    border: 1px solid $color-border;
+}
+
+QDockWidget::title {
+    background-color: $color-background-tertiary;
+    text-align: left;
+    padding: 0 $spacing-md;
+    min-height: $size-toolbar-height;
+}
+
+QDockWidget::title:hover {
+    background-color: $color-surface;
+}
+
+// Tree Views
+QTreeView {
+    background-color: $color-background-primary;
+    border: none;
+    alternate-background-color: $color-background-secondary;
+    show-decoration-selected: 1;
+    gridline-color: $color-border;
+}
+
+QTreeView::header {
+    background-color: $color-background-tertiary;
+    border-bottom: 1px solid $color-border;
+    padding: 0 $spacing-md;
+    min-height: 26px;
+}
+
+QTreeView::header::section {
+    background-color: $color-background-tertiary;
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border: none;
+    border-right: 1px solid $color-border;
+}
+
+QTreeView::item {
+    height: 20px;
+    padding: 0 $spacing-xs;
+}
+
+QTreeView::item:hover {
+    background-color: $color-surface;
+}
+
+QTreeView::item:selected {
+    background-color: $color-accent-primary;
+}
+
+// Table Views
+QTableView {
+    background-color: $color-background-primary;
+    border: none;
+    alternate-background-color: $color-background-secondary;
+    gridline-color: $color-border;
+}
+
+QTableView::item {
+    padding: $spacing-xs $spacing-sm;
+}
+
+QTableView::item:selected {
+    background-color: $color-accent-primary;
+}
+
+QHeaderView::section {
+    background-color: $color-background-tertiary;
+    color: $color-text-primary;
+    padding: $spacing-xs $spacing-md;
+    border: none;
+    border-right: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+}
+
+// List Views
+QListView {
+    background-color: $color-background-primary;
+    border: none;
+    alternate-background-color: $color-background-secondary;
+}
+
+QListView::item {
+    padding: $spacing-sm;
+}
+
+QListView::item:selected {
+    background-color: $color-accent-primary;
+}
+
+// Dialog Windows
+QDialog {
+    background-color: $color-background-secondary;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+}
+
+// Status Bar
+QStatusBar {
+    background-color: $color-background-secondary;
+    border-top: 1px solid $color-border;
+}
+
+QStatusBar QLabel {
+    background-color: transparent;
+    padding: 0 $spacing-sm;
+    color: $color-text-secondary;
+}
+
+QStatusBar::item {
+    border: none;
+}
+
+// Splitter
+QSplitter::handle {
+    background-color: $color-border;
+}
+
+QSplitter::handle:horizontal {
+    width: 1px;
+}
+
+QSplitter::handle:vertical {
+    height: 1px;
+}
+
+QSplitter::handle:hover {
+    background-color: $color-accent-primary;
+}
+
+// Tool Box
+QToolBox {
+    background-color: $color-background-secondary;
+    border: none;
+}
+
+QToolBox::tab {
+    background-color: $color-background-tertiary;
+    color: $color-text-secondary;
+    padding: $spacing-sm $spacing-lg;
+    border-bottom: 1px solid $color-border;
+}
+
+QToolBox::tab:selected {
+    background-color: $color-background-secondary;
+    color: $color-text-primary;
+}
+
+QToolBox::tab:hover:!selected {
+    background-color: $color-surface;
+}
+
+// Group Box
+QGroupBox {
+    background-color: transparent;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    margin-top: $spacing-lg;
+    padding-top: $spacing-lg;
+}
+
+QGroupBox::title {
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 $spacing-sm;
+    left: $spacing-md;
+}
+
+// Scroll Area
+QScrollArea {
+    background-color: $color-background-secondary;
+    border: none;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: $color-background-secondary;
+    border: none;
+}
+
+// Stack Widget
+QStackedWidget {
+    background-color: $color-background-secondary;
+}
+
+// Text Browser (for help/information)
+QTextBrowser {
+    background-color: $color-background-primary;
+    border: none;
+    color: $color-text-primary;
+    selection-background-color: $color-accent-primary;
+}
+
+// Command Link Button
+QCommandLinkButton {
+    background-color: transparent;
+    border: none;
+    color: $color-accent-primary;
+    padding: $spacing-sm;
+}
+
+QCommandLinkButton:hover {
+    color: $color-accent-hover;
+}
+
+QCommandLinkButton:pressed {
+    color: $color-accent-active;
+}
+
+// Dock Widget Title Bar Buttons
+QDockWidget QToolButton {
+    background-color: transparent;
+    border: none;
+}
+
+QDockWidget QToolButton:hover {
+    background-color: $color-surface;
+}
