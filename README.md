@@ -1,8 +1,34 @@
-# FPA Grant Proposals
-Submit grant proposals to the [The FreeCAD Project Association](https://fpa.freecad.org) by [creating an issue](https://github.com/FreeCAD/FPA-grant-proposals/issues/new/choose) in this repository. For more information see [The FreeCAD Grant Program](https://fpa.freecad.org/programs/fpadf-announcement).
+# HIPAIR Exporter for FreeCAD
 
-Proposals will be considered by the FPA general body and approved by vote. A list of [approved grants](https://fpa.freecad.org/programs/fpadf-announcement) is available on the FPA's website.
+This addon exports parts and assemblies from FreeCAD to the HIPAIR input format.
+HIPAIR is an open-source configuration space visualization tool.
 
-## Reporting
+## Features
+- Export FreeCAD shapes (faces, wires, edges) to HIPAIR format.
+- Handles line segments and arcs.
+- Can export all objects in document or selected objects.
 
-In most cases grantees will submit periodic reports to the FPA detailing their work to date. Those reports are submitted as Pull Requests to the [FPA's main git repository](https://github.com/FreeCAD/FPA/tree/main/reports).
+## Usage
+1. Open FreeCAD.
+2. Run the macro `hipair_exporter.py`.
+3. The exporter will generate a `.hipair` file in the same directory as the document.
+
+Alternatively, use the Python console:
+```python
+import hipair_exporter
+hipair_exporter.export_to_hipair("output.hipair")
+# or export selected:
+hipair_exporter.export_selected_to_hipair("output.hipair")
+```
+
+## HIPAIR Format
+Each part is defined with a name, then a slice containing lines and arcs.
+Lines: `LINE x1 y1 x2 y2`
+Arcs: `ARC xc yc radius startangle endangle`
+
+Parts are separated by `PART` and `ENDPART`.
+
+## Limitations
+- Only planar geometry in XY plane is considered (Z coordinates ignored).
+- Only lines and arcs are supported (other curves are skipped).
+- FreeCAD assemblies are not recursively traversed (all objects are flat).
