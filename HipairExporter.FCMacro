@@ -1,0 +1,132 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+FreeCAD Macro: Export selected 2D geometries to HIPAIR input format.
+
+HIPAIR Configuration Space Visualization input format:
+- Supports line segments and circular arcs.
+- Each part can have multiple slices.
+- Output format: <part_name> [slice1] [slice2] ...
+- Each slice: list of edges: L x1 y1 x2 y2 (line) or A x1 y1 x2 y2 cx cy r sweep_flag (arc)
+
+Usage:
+1. Open a FreeCAD document with planar sketches or faces.
+2. Select one or more objects (e.g., Sketch, Face) to export.
+3. Run this macro. It will prompt for a save file location.
+4. Exports a .hipair file.
+"""
+
+import FreeCAD
+import FreeCADGui
+import Part
+import math
+from PySide import QtGui
+
+def get_hipair_filename():
+    """Open save dialog and return selected filename."""
+    filename, _ = QtGui.QFileDialog.getSaveFileName(
+        None,
+        "Save HIPAIR Input",
+        "",
+        "HIPAIR files (*.hipair);;All files (*)"
+    )
+    return filename
+
+def edges_from_shape(shape, placement=None):
+    """Extract edges (lines and arcs) from a shape, respecting placement."""
+    edges = []
+    for edge in shape.Edges:
+        if edge.Curve.TypeId == 'Part::GeomLine':
+            pts = edge.Vertexes
+            if len(pts) >= 2:
+                p1 = pts[0].Point
+                p2 = pts[1].Point
+                if placement:
+                    p1 = placement.multVec(p1)
+                    p2 = placement.multVec(p2)
+                edges.append(('L', p1.x, p1.y, p2.x, p2.y))
+        elif edge.Curve.TypeId == 'Part::GeomArcOfCircle':
+            curve = edge.Curve
+            # arc defined by start point, end point, center, radius, sweep flag
+            p_start = edge.Vertexes[0].Point
+            p_end = edge.Vertexes[-1].Point
+            center = curve.Center
+            radius = curve.Radius
+            # Determine sweep: counter-clockwise if end angle > start angle
+            angle_start = curve.AngleStart
+            angle_end = curve.AngleEnd
+            sweep = 1 if angle_end > angle_start else 0
+            if placement:
+                p_start = placement.multVec(p_start)
+                p_end = placement.multVec(p_end)
+                center = placement.multVec(center)
+            edges.append(('A', p_start.x, p_start.y, p_end.x, p_end.y,
+                          center.x, center.y, radius, sweep))
+    return edges
+
+def export_selection():
+    doc = FreeCAD.ActiveDocument
+    if not doc:
+        QtGui.QMessageBox.warning(None, "No Document", "No active document.")
+        return
+
+    selection = FreeCADGui.Selection.getSelection()
+    if not selection:
+        QtGui.QMessageBox.warning(None, "No Selection", "Please select objects.")
+        return
+
+    filename = get_hipair_filename()
+    if not filename:
+        return  # user cancelled
+
+    output_lines = []
+    for obj in selection:
+        part_name = obj.Label.replace(' ', '_')
+        shape = obj.Shape
+        if shape.isNull():
+            continue
+        # Get placement (global)
+        placement = obj.Placement
+        # If object is a sketch, its Shape is already in local coordinates, but we need global?
+        # Usually sketches are relative to placement; we apply placement.
+        # Check if shape is planar
+        if shape.ShapeType == 'Face':
+            # Could be a planar face from a pad, etc.
+            # Extract edges from the outer wire
+            wire = shape.Wires[0]
+            edges = edges_from_shape(wire)
+        else:
+            # Assume shape contains edges directly (e.g., sketch, part design features?)
+            edges = edges_from_shape(shape, placement)
+
+        if not edges:
+            continue
+
+        # Group edges into slices: for simplicity, all edges in one slice
+        # HIPAIR allows multiple slices; we'll put all edges in a single slice.
+        lines = []
+        for e in edges:
+            if e[0] == 'L':
+                lines.append("L {:.6f} {:.6f} {:.6f} {:.6f}".format(e[1], e[2], e[3], e[4]))
+            elif e[0] == 'A':
+                lines.append("A {:.6f} {:.6f} {:.6f} {:.6f} {:.6f} {:.6f} {:.6f} {:.0f}".format(
+                    e[1], e[2], e[3], e[4], e[5], e[6], e[7], e[8]))
+        # Write slice header: slice number? HIPAIR expects slice markers?
+        # We'll add a line "slice 1" before edges
+        output_lines.append("PART {}".format(part_name))
+        output_lines.append("SLICE")
+        output_lines.extend(lines)
+        output_lines.append("ENDSLICE")
+        output_lines.append("ENDPART")
+
+    if output_lines:
+        with open(filename, 'w') as f:
+            f.write('\n'.join(output_lines))
+        QtGui.QMessageBox.information(None, "Export Success",
+                                      "Exported to {}".format(filename))
+    else:
+        QtGui.QMessageBox.warning(None, "No data", "No exportable geometry found.")
+
+if __name__ == '__main__':
+    export_selection()
